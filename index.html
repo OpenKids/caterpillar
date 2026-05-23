@@ -110,7 +110,15 @@
     <!-- 2. QUIZ SCREEN -->
     <section id="screen-quiz" class="screen">
       <!-- Life Cycle Journey Map / Progress Tracker -->
-      <div class="journey-map" aria-label="Caterpillar growth journey">
+      <div class="journey-map" role="progressbar" aria-label="Caterpillar growth journey" aria-valuemin="1" aria-valuemax="8" aria-valuenow="1">
+        <div class="journey-summary">
+          <div>
+            <span class="journey-eyebrow text-cn">成长进度</span>
+            <span class="journey-eyebrow text-en hidden">Growth Progress</span>
+            <div class="journey-stage-name" id="journey-stage-name">蚕卵</div>
+          </div>
+          <div class="journey-count" id="journey-count">1 / 8</div>
+        </div>
         <div class="journey-line"></div>
         <div class="journey-progress-line" id="journey-progress-bar"></div>
         

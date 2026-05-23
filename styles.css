@@ -452,38 +452,97 @@ body {
    ========================================================================== */
 .journey-map {
   width: 100%;
-  background: var(--card-bg);
-  border: var(--card-border);
-  border-radius: var(--border-radius-lg);
-  padding: 16px 20px 20px;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(244, 252, 238, 0.9)),
+    radial-gradient(circle at 10% 0%, rgba(255, 210, 90, 0.22), transparent 34%);
+  border: 3px solid rgba(101, 169, 74, 0.26);
+  border-radius: 20px;
+  padding: 14px 22px 18px;
   margin-bottom: 16px;
-  box-shadow: var(--card-shadow);
+  box-shadow: 0 14px 28px rgba(71, 124, 81, 0.13);
   backdrop-filter: blur(12px);
   position: relative;
   flex-shrink: 0;
+  overflow: hidden;
+}
+
+.journey-map::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle, rgba(116, 194, 92, 0.16) 1.5px, transparent 1.5px),
+    radial-gradient(circle, rgba(255, 196, 55, 0.16) 1.5px, transparent 1.5px);
+  background-position: 0 0, 12px 12px;
+  background-size: 24px 24px;
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+.journey-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 18px;
+  position: relative;
+  z-index: 4;
+}
+
+.journey-eyebrow {
+  display: block;
+  color: var(--text-light);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.journey-stage-name {
+  color: var(--primary-dark);
+  font-size: 1.22rem;
+  font-weight: 900;
+  line-height: 1.15;
+  margin-top: 2px;
+}
+
+.journey-count {
+  background: hsl(43, 100%, 88%);
+  border: 2px solid rgba(215, 154, 18, 0.22);
+  border-radius: 999px;
+  color: hsl(33, 92%, 28%);
+  font-size: 1rem;
+  font-weight: 900;
+  line-height: 1;
+  padding: 9px 13px;
+  white-space: nowrap;
+  box-shadow: 0 5px 12px rgba(195, 142, 28, 0.12);
 }
 
 .journey-line {
   position: absolute;
-  height: 8px;
-  background: hsl(142, 30%, 86%);
-  border-radius: 4px;
-  top: 48px;
+  height: 12px;
+  background: linear-gradient(180deg, hsl(142, 30%, 88%), hsl(142, 26%, 80%));
+  border: 2px solid rgba(70, 128, 75, 0.08);
+  border-radius: 999px;
+  top: 96px;
   left: 8%;
   right: 8%;
   z-index: 1;
+  box-shadow: inset 0 2px 4px rgba(66, 104, 67, 0.12);
 }
 
 .journey-progress-line {
   position: absolute;
-  height: 8px;
-  background: var(--primary);
-  border-radius: 4px;
-  top: 48px;
+  height: 12px;
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
+  border-radius: 999px;
+  top: 96px;
   left: 8%;
   width: var(--progress-track-percent);
   z-index: 2;
   transition: width 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 0 14px rgba(116, 194, 92, 0.32);
 }
 
 .journey-nodes {
@@ -498,15 +557,16 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
+  gap: 9px;
   cursor: default;
+  min-width: 58px;
 }
 
 .node-icon {
-  width: 56px;
-  height: 56px;
+  width: 54px;
+  height: 54px;
   background: white;
-  border: 4px solid hsl(142, 20%, 85%);
+  border: 3px solid hsl(142, 20%, 84%);
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -514,20 +574,22 @@ body {
   font-size: 1.8rem;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
 }
 
 .journey-node.active .node-icon {
-  border-color: var(--primary);
-  background: var(--primary-light);
+  border-color: var(--secondary);
+  background: linear-gradient(180deg, hsl(43, 100%, 92%), hsl(142, 65%, 94%));
   transform: scale(1.15);
-  box-shadow: 0 0 15px rgba(116, 194, 92, 0.4);
+  box-shadow: 0 8px 20px rgba(116, 194, 92, 0.24);
   animation: pulse-node 2s infinite alternate;
 }
 
 .journey-node.completed .node-icon {
-  background: var(--primary);
+  background: linear-gradient(180deg, var(--primary), var(--primary-dark));
   border-color: var(--primary);
   color: white;
+  box-shadow: 0 6px 14px rgba(58, 129, 66, 0.18);
 }
 
 .node-label {
@@ -546,6 +608,23 @@ body {
   color: var(--primary);
 }
 
+.journey-node.completed .node-icon::after {
+  content: "✓";
+  position: absolute;
+  right: -4px;
+  bottom: -4px;
+  width: 20px;
+  height: 20px;
+  background: var(--secondary);
+  border: 2px solid white;
+  border-radius: 50%;
+  color: hsl(33, 92%, 28%);
+  font-size: 0.8rem;
+  font-weight: 900;
+  line-height: 16px;
+  text-align: center;
+}
+
 @keyframes pulse-node {
   0% { box-shadow: 0 0 0 0 rgba(116, 194, 92, 0.4); }
   100% { box-shadow: 0 0 0 10px rgba(116, 194, 92, 0); }
@@ -554,7 +633,7 @@ body {
 /* Crawling Caterpillar on Progress Bar */
 .crawling-caterpillar {
   position: absolute;
-  top: 16px;
+  top: 64px;
   left: calc(8% + var(--progress-track-percent) - 24px);
   z-index: 4;
   pointer-events: none;
@@ -1239,7 +1318,20 @@ body {
   }
   
   .journey-map {
-    padding: 20px 10px 24px;
+    padding: 14px 10px 18px;
+  }
+
+  .journey-summary {
+    margin-bottom: 14px;
+  }
+
+  .journey-stage-name {
+    font-size: 1rem;
+  }
+
+  .journey-count {
+    font-size: 0.9rem;
+    padding: 8px 10px;
   }
   
   .node-icon {
@@ -1254,11 +1346,12 @@ body {
   }
   
   .journey-line, .journey-progress-line {
-    top: 40px;
+    top: 84px;
+    height: 10px;
   }
   
   .crawling-caterpillar {
-    top: 14px;
+    top: 54px;
   }
   
   .quiz-card {

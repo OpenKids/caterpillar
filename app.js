@@ -404,6 +404,9 @@ const DOM = {
   screenResults: document.getElementById('screen-results'),
   
   appTitle: document.getElementById('app-title'),
+  journeyMap: document.querySelector('.journey-map'),
+  journeyStageName: document.getElementById('journey-stage-name'),
+  journeyCount: document.getElementById('journey-count'),
   journeyProgressBar: document.getElementById('journey-progress-bar'),
   crawlingCaterpillar: document.getElementById('crawling-caterpillar'),
   illustrationPanel: document.getElementById('illustration-panel'),
@@ -477,6 +480,7 @@ function updateLanguageUI() {
 
   // Re-render current question with updated language details if in quiz mode
   if (state.currentScreen === 'quiz') {
+    updateProgressTracker();
     renderCurrentQuestionText();
   }
 }
@@ -523,6 +527,24 @@ function updateProgressTracker() {
   else if (state.currentQuestionIndex >= 6) currentStageIndex = 3; // cocoon
   else if (state.currentQuestionIndex >= 4) currentStageIndex = 2; // big silkworm
   else if (state.currentQuestionIndex >= 2) currentStageIndex = 1; // baby silkworm
+
+  const stageNames = state.currentLang === 'en'
+    ? ['Egg', 'Baby Silkworm', 'Growing Silkworm', 'Cocoon', 'Silk Moth']
+    : ['蚕卵', '小蚕', '大蚕', '结茧', '蚕蛾'];
+
+  if (DOM.journeyStageName) {
+    DOM.journeyStageName.innerText = stageNames[currentStageIndex];
+  }
+
+  if (DOM.journeyCount) {
+    DOM.journeyCount.innerText = `${state.currentQuestionIndex + 1} / ${total}`;
+  }
+
+  if (DOM.journeyMap) {
+    DOM.journeyMap.setAttribute('aria-valuenow', String(state.currentQuestionIndex + 1));
+    DOM.journeyMap.setAttribute('aria-valuemax', String(total));
+    DOM.journeyMap.setAttribute('aria-valuetext', `${stageNames[currentStageIndex]}, ${state.currentQuestionIndex + 1} of ${total}`);
+  }
   
   // Update node classes
   for (let i = 0; i < 5; i++) {
