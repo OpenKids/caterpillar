@@ -28,6 +28,7 @@
   
   /* Journey Progress Indicator */
   --progress-percent: 0%;
+  --progress-track-percent: 0%;
 }
 
 /* ==========================================================================
@@ -44,11 +45,11 @@ body {
   font-family: var(--font-fun);
   background: var(--bg-gradient);
   color: var(--text-dark);
-  min-height: 100vh;
+  height: 100dvh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  overflow-x: hidden;
+  overflow: hidden;
   position: relative;
   line-height: 1.5;
 }
@@ -214,17 +215,19 @@ body {
   flex: 1;
   width: 100%;
   max-width: 760px;
-  padding: 10px 20px 30px;
+  padding: 10px 20px 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   position: relative;
+  overflow: hidden;
 }
 
 .screen {
   display: none;
   width: 100%;
+  max-height: 100%;
   opacity: 0;
   transform: scale(0.96);
   transition:
@@ -235,7 +238,9 @@ body {
 }
 
 .screen.active {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   opacity: 1;
   transform: scale(1);
 }
@@ -254,14 +259,16 @@ body {
   background: var(--card-bg);
   border: var(--card-border);
   border-radius: var(--border-radius-lg);
-  padding: 40px 30px;
+  padding: 24px 30px;
   text-align: center;
   box-shadow: var(--card-shadow);
   backdrop-filter: blur(12px);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: 16px;
+  max-height: 80vh;
+  overflow-y: auto;
 }
 
 .welcome-animation {
@@ -448,11 +455,12 @@ body {
   background: var(--card-bg);
   border: var(--card-border);
   border-radius: var(--border-radius-lg);
-  padding: 24px 20px 30px;
-  margin-bottom: 24px;
+  padding: 16px 20px 20px;
+  margin-bottom: 16px;
   box-shadow: var(--card-shadow);
   backdrop-filter: blur(12px);
   position: relative;
+  flex-shrink: 0;
 }
 
 .journey-line {
@@ -473,7 +481,7 @@ body {
   border-radius: 4px;
   top: 48px;
   left: 8%;
-  width: var(--progress-percent);
+  width: var(--progress-track-percent);
   z-index: 2;
   transition: width 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
@@ -547,7 +555,7 @@ body {
 .crawling-caterpillar {
   position: absolute;
   top: 16px;
-  left: calc(8% + var(--progress-percent) * 0.84 - 24px); /* Scales relative to progress bar bounds */
+  left: calc(8% + var(--progress-track-percent) - 24px);
   z-index: 4;
   pointer-events: none;
   transition: left 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -623,26 +631,37 @@ body {
   background: var(--card-bg);
   border: var(--card-border);
   border-radius: var(--border-radius-lg);
-  padding: 30px;
+  padding: 20px 24px;
   box-shadow: var(--card-shadow);
   backdrop-filter: blur(12px);
   position: relative;
-  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  max-height: 65vh;
+  overflow-y: auto;
 }
 
 /* Illustration Panel styles */
 .illustration-panel {
   width: 100%;
-  height: 180px;
+  height: 150px;
   background: radial-gradient(circle at center, #f5fcf0, #e9f7df);
   border-radius: var(--border-radius-md);
-  margin-bottom: 20px;
+  margin-bottom: 16px;
   border: 2px dashed hsl(142, 30%, 80%);
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
   overflow: hidden;
+  flex-shrink: 0;
+}
+
+.illustration-panel img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: calc(var(--border-radius-md) - 2px);
 }
 
 /* Specific interactive SVG styles in question panel */
@@ -700,12 +719,60 @@ body {
 }
 
 /* Question Header */
+.question-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
 .question-text {
   font-size: 1.55rem;
   line-height: 1.4;
-  margin-bottom: 24px;
   color: var(--text-dark);
   font-weight: 800;
+  margin-bottom: 0;
+  flex: 1;
+}
+
+.btn-speak {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: var(--secondary);
+  border: none;
+  border-bottom: 4px solid #e5ad20;
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 10px rgba(229, 173, 32, 0.2);
+  transition: all 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  flex-shrink: 0;
+}
+
+.btn-speak:hover {
+  transform: scale(1.1);
+  background: var(--secondary-hover);
+  box-shadow: 0 6px 14px rgba(229, 173, 32, 0.3);
+}
+
+.btn-speak:active {
+  transform: scale(0.95);
+  border-bottom-width: 1px;
+  transform: translateY(3px);
+}
+
+/* Speak animation pulse */
+.btn-speak.speaking {
+  animation: speak-pulse 1s infinite alternate ease-in-out;
+}
+
+@keyframes speak-pulse {
+  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(229, 173, 32, 0.6); }
+  100% { transform: scale(1.15); box-shadow: 0 0 12px 6px rgba(229, 173, 32, 0); }
 }
 
 /* Options Lists */
@@ -822,6 +889,76 @@ body {
   animation: pop-up 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
+.feedback-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(28, 46, 32, 0.48);
+  backdrop-filter: blur(6px);
+  animation: modal-fade 0.2s ease-out;
+}
+
+.feedback-modal-card {
+  width: min(92vw, 460px);
+  background: rgba(255, 255, 255, 0.96);
+  border: 4px solid var(--correct);
+  border-radius: var(--border-radius-lg);
+  padding: 28px 26px;
+  text-align: center;
+  box-shadow: 0 20px 48px rgba(39, 67, 48, 0.24);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  animation: modal-pop 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.feedback-modal-card.incorrect {
+  border-color: var(--incorrect);
+}
+
+.feedback-modal-icon {
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  background: var(--correct-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.4rem;
+}
+
+.feedback-modal-card.incorrect .feedback-modal-icon {
+  background: var(--incorrect-bg);
+}
+
+.feedback-modal-title {
+  color: var(--primary-dark);
+  font-size: 1.75rem;
+  line-height: 1.2;
+}
+
+.feedback-modal-message {
+  color: var(--text-dark);
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1.55;
+}
+
+@keyframes modal-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes modal-pop {
+  from { opacity: 0; transform: translateY(18px) scale(0.92); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
 .feedback-content {
   display: flex;
   align-items: center;
@@ -856,20 +993,51 @@ body {
 /* ==========================================================================
    RESULTS SCREEN
    ========================================================================== */
+#screen-results {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(30, 45, 34, 0.55);
+  backdrop-filter: blur(8px);
+  z-index: 1000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  transition: opacity 0.3s ease-out;
+}
+
+#screen-results.active {
+  display: flex;
+  opacity: 1;
+  transform: none;
+}
+
 .results-card {
   background: var(--card-bg);
   border: var(--card-border);
   border-radius: var(--border-radius-lg);
-  padding: 40px 30px;
+  padding: 28px 30px;
   text-align: center;
-  box-shadow: var(--card-shadow);
-  backdrop-filter: blur(12px);
+  box-shadow: 0 20px 50px rgba(40, 70, 50, 0.25);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: 16px;
   position: relative;
-  overflow: hidden;
+  overflow-y: auto;
+  max-height: 85vh;
+  width: 100%;
+  max-width: 520px;
+  animation: results-pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes results-pop {
+  0% { transform: scale(0.6) translateY(50px); opacity: 0; }
+  100% { transform: scale(1) translateY(0); opacity: 1; }
 }
 
 .moth-celebration {
@@ -1019,10 +1187,11 @@ body {
    ========================================================================== */
 .app-footer {
   text-align: center;
-  padding: 20px;
-  font-size: 0.9rem;
+  padding: 12px 20px;
+  font-size: 0.85rem;
   color: var(--text-light);
   font-weight: 500;
+  flex-shrink: 0;
 }
 
 /* ==========================================================================

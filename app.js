@@ -23,33 +23,7 @@ const QUIZ_QUESTIONS = [
     },
     correctAnswer: 1, // B
     stageIndex: 0, // Egg / Start stage
-    illustration: `
-      <svg viewBox="0 0 200 150" width="100%" height="100%">
-        <!-- A gorgeous mulberry leaf being eaten by a small caterpillar -->
-        <g class="svg-leaf-feed">
-          <path d="M40 100 Q 80 20 160 50 Q 140 110 40 100 Z" fill="#75cb52" stroke="#5a9e3e" stroke-width="4" />
-          <path d="M40 100 Q 95 65 160 50" stroke="#5a9e3e" stroke-width="2" fill="none" />
-          <path d="M90 77 Q 110 95 120 105" stroke="#5a9e3e" stroke-width="2" fill="none" />
-          <path d="M120 63 Q 140 80 150 90" stroke="#5a9e3e" stroke-width="2" fill="none" />
-          <!-- Bite marks (transparent circles) -->
-          <circle cx="160" cy="50" r="18" fill="#e9f7df" class="bite-mark" />
-          <circle cx="150" cy="38" r="14" fill="#e9f7df" class="bite-mark" />
-          <circle cx="142" cy="62" r="12" fill="#e9f7df" class="bite-mark" />
-        </g>
-        <!-- Little baby caterpillar -->
-        <g transform="translate(105, 55) scale(0.9)" class="caterpillar-mini">
-          <circle cx="10" cy="15" r="9" fill="#a2df8a" stroke="#5a9e3e" stroke-width="1.5" />
-          <circle cx="20" cy="12" r="9" fill="#a2df8a" stroke="#5a9e3e" stroke-width="1.5" />
-          <circle cx="30" cy="15" r="10" fill="#92d677" stroke="#5a9e3e" stroke-width="1.5" />
-          <circle cx="40" cy="12" r="11" fill="#7dcd5e" stroke="#5a9e3e" stroke-width="1.5" />
-          <circle cx="50" cy="15" r="12" fill="#69c347" stroke="#5a9e3e" stroke-width="2" />
-          <!-- Head -->
-          <circle cx="58" cy="10" r="11" fill="#5db93a" stroke="#489729" stroke-width="2" />
-          <circle cx="61" cy="7" r="1.5" fill="#222" />
-          <path d="M60 14 Q 57 11 54 12" stroke="#222" stroke-width="1" fill="none" />
-        </g>
-      </svg>
-    `
+    illustration: `<img src="assets/mulberry_leaf_caterpillar.png" alt="A silkworm caterpillar eating a green mulberry leaf">`
   },
   {
     // Q2
@@ -67,32 +41,7 @@ const QUIZ_QUESTIONS = [
     },
     correctAnswer: 2, // C
     stageIndex: 0,
-    illustration: `
-      <svg viewBox="0 0 200 150" width="100%" height="100%">
-        <!-- Silk Moth vector representation -->
-        <g transform="translate(100, 75) scale(0.7)" class="moth-illustration">
-          <!-- Wings -->
-          <g class="wing wing-left">
-            <path d="M-10 -10 Q -80 -60 -90 0 Q -80 40 -10 0 Z" fill="#ffffff" stroke="#d5cea3" stroke-width="3" />
-          </g>
-          <g class="wing wing-right">
-            <path d="M10 -10 Q 80 -60 90 0 Q 80 40 10 0 Z" fill="#ffffff" stroke="#d5cea3" stroke-width="3" />
-          </g>
-          <!-- Body -->
-          <ellipse cx="0" cy="0" rx="15" ry="25" fill="#fcfbf7" stroke="#d5cea3" stroke-width="2" />
-          <circle cx="0" cy="-25" r="12" fill="#ebe6d0" stroke="#d5cea3" stroke-width="2" />
-          <!-- Face details -->
-          <circle cx="-5" cy="-27" r="3" fill="#222" />
-          <circle cx="5" cy="-27" r="3" fill="#222" />
-          <path d="M-12 -38 Q -30 -50 -40 -40" stroke="#7d5a3e" stroke-width="2" fill="none" />
-          <path d="M12 -38 Q 30 -50 40 -40" stroke="#7d5a3e" stroke-width="2" fill="none" />
-        </g>
-        <!-- Sparkles -->
-        <path d="M 40,40 L 45,45 M 40,45 L 45,40" stroke="#ffd15c" stroke-width="3" stroke-linecap="round" />
-        <path d="M 160,110 L 165,115 M 160,115 L 165,110" stroke="#ffd15c" stroke-width="3" stroke-linecap="round" />
-        <path d="M 150,30 L 155,35 M 150,35 L 155,30" stroke="#ffd15c" stroke-width="3" stroke-linecap="round" />
-      </svg>
-    `
+    illustration: `<img src="assets/white_silk_moth.png" alt="A fluffy white silk moth sitting on a leaf">`
   },
   {
     // Q3
@@ -110,32 +59,7 @@ const QUIZ_QUESTIONS = [
     },
     correctAnswer: 1, // B
     stageIndex: 1, // Baby Silkworm stage
-    illustration: `
-      <svg viewBox="0 0 200 150" width="100%" height="100%">
-        <!-- Leaf with water droplets and a warning red circle cross -->
-        <g transform="translate(20, 10)">
-          <path d="M30 90 Q 70 10 140 40 Q 120 100 30 90 Z" fill="#75cb52" stroke="#5a9e3e" stroke-width="3" />
-          <path d="M30 90 Q 85 55 140 40" stroke="#5a9e3e" stroke-width="2" fill="none" />
-          <!-- Droplets -->
-          <circle cx="70" cy="50" r="5" fill="#69b3ff" opacity="0.9" />
-          <path d="M70 45 Q 70 50 67 52 Q 73 52 70 45" fill="#69b3ff" />
-          
-          <circle cx="105" cy="65" r="4" fill="#69b3ff" opacity="0.9" />
-          <path d="M105 61 Q 105 65 102 67 Q 108 67 105 61" fill="#69b3ff" />
-          
-          <!-- Drip dropping animation representation -->
-          <g class="water-drop">
-            <circle cx="115" cy="30" r="3.5" fill="#69b3ff" />
-          </g>
-        </g>
-        
-        <!-- Red Warning Sign -->
-        <g transform="translate(135, 95)">
-          <circle cx="20" cy="20" r="22" fill="none" stroke="#ff5c5c" stroke-width="6" />
-          <line x1="6" y1="6" x2="34" y2="34" stroke="#ff5c5c" stroke-width="6" />
-        </g>
-      </svg>
-    `
+    illustration: `<img src="assets/wet_mulberry_leaves.png" alt="Green mulberry leaves with water droplets">`
   },
   {
     // Q4
@@ -153,32 +77,7 @@ const QUIZ_QUESTIONS = [
     },
     correctAnswer: 0, // A
     stageIndex: 1,
-    illustration: `
-      <svg viewBox="0 0 200 150" width="100%" height="100%">
-        <!-- Cute branch/leaf with little eggs on it -->
-        <path d="M20 120 C 60 120 140 100 180 80" stroke="#8e6a4b" stroke-width="6" stroke-linecap="round" fill="none" />
-        <path d="M80 106 Q 100 70 140 75 Q 120 110 80 106 Z" fill="#8fcf7a" stroke="#5a9e3e" stroke-width="2" />
-        
-        <!-- Little silkworm eggs (tiny yellowish/purple circles) -->
-        <g class="egg-glow">
-          <ellipse cx="98" cy="92" rx="4" ry="5" fill="#f3d87b" stroke="#cbb24f" stroke-width="1" />
-          <ellipse cx="106" cy="88" rx="4" ry="5" fill="#eed274" stroke="#cbb24f" stroke-width="1" />
-          <ellipse cx="114" cy="94" rx="4" ry="5" fill="#eed274" stroke="#cbb24f" stroke-width="1" />
-          <ellipse cx="105" cy="98" rx="5" ry="4" fill="#dfb36b" stroke="#b08b43" stroke-width="1" />
-          <ellipse cx="122" cy="87" rx="4" ry="5" fill="#d296c8" stroke="#a06096" stroke-width="1" />
-          <ellipse cx="126" cy="96" rx="5" ry="4" fill="#c385b9" stroke="#a06096" stroke-width="1" />
-        </g>
-        
-        <!-- Magnifying glass looking at the eggs -->
-        <g transform="translate(30, 20)">
-          <!-- Glass effect background -->
-          <circle cx="45" cy="45" r="30" fill="rgba(100, 200, 255, 0.15)" stroke="#555" stroke-width="4" />
-          <line x1="66" y1="66" x2="90" y2="90" stroke="#7a5435" stroke-width="8" stroke-linecap="round" />
-          <!-- Reflection streak -->
-          <path d="M25 35 A 22 22 0 0 1 55 20" stroke="white" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.6" />
-        </g>
-      </svg>
-    `
+    illustration: `<img src="assets/silkworm_eggs.png" alt="Silkworm eggs on a leaf">`
   },
   {
     // Q5
@@ -196,38 +95,7 @@ const QUIZ_QUESTIONS = [
     },
     correctAnswer: 0, // A
     stageIndex: 2, // Big Silkworm stage
-    illustration: `
-      <svg viewBox="0 0 200 150" width="100%" height="100%">
-        <!-- Silkworm shedding its skin -->
-        <g transform="translate(15, 20)">
-          <!-- Old shed skin left behind -->
-          <g opacity="0.65" transform="rotate(-15) translate(0, 40)">
-            <path d="M20 70 Q 30 65 40 70 T 60 70 T 80 70" fill="none" stroke="#ddd6c1" stroke-width="12" stroke-linecap="round" />
-            <path d="M20 70 Q 30 65 40 70 T 60 70 T 80 70" fill="none" stroke="#bfa881" stroke-dasharray="1,5" stroke-width="12" stroke-linecap="round" />
-          </g>
-          
-          <!-- Arrow pointing forward -->
-          <path d="M85 55 L 105 55 M 100 48 L 107 55 L 100 62" stroke="#75cb52" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none" />
-          
-          <!-- Larger caterpillar stepping forward -->
-          <g transform="translate(100, 20)">
-            <!-- Segments -->
-            <circle cx="10" cy="50" r="14" fill="#eefae8" stroke="#75cb52" stroke-width="2" />
-            <circle cx="24" cy="46" r="15" fill="#eefae8" stroke="#75cb52" stroke-width="2" />
-            <circle cx="38" cy="42" r="16" fill="#e8f7df" stroke="#75cb52" stroke-width="2" />
-            <circle cx="52" cy="45" r="17" fill="#dcf3d0" stroke="#75cb52" stroke-width="2" />
-            <circle cx="68" cy="50" r="18" fill="#cbeeb9" stroke="#75cb52" stroke-width="2" />
-            <!-- Head -->
-            <circle cx="82" cy="43" r="16" fill="#b9e7a2" stroke="#5cb22d" stroke-width="2.5" />
-            <circle cx="86" cy="39" r="2" fill="#222" />
-            <!-- Happy face -->
-            <path d="M85 47 Q 81 44 78 46" stroke="#222" stroke-width="1.5" fill="none" />
-            <!-- Sparkles -->
-            <path d="M 68,15 L 72,25 M 63,20 L 73,20" stroke="#ffd15c" stroke-width="2" />
-          </g>
-        </g>
-      </svg>
-    `
+    illustration: `<img src="assets/silkworm_molting.png" alt="A silkworm shedding its skin">`
   },
   {
     // Q6
@@ -245,44 +113,14 @@ const QUIZ_QUESTIONS = [
     },
     correctAnswer: 1, // B
     stageIndex: 2,
-    illustration: `
-      <svg viewBox="0 0 200 150" width="100%" height="100%">
-        <!-- 4 shirts/skins row representing the 4 sheds -->
-        <g transform="translate(15, 45)">
-          <!-- Skin 1 -->
-          <g transform="translate(0, 10) scale(0.7)">
-            <ellipse cx="20" cy="40" rx="12" ry="20" fill="#fcf9ee" stroke="#b8ad8f" stroke-dasharray="2,2" stroke-width="2" />
-            <circle cx="20" cy="15" r="10" fill="#ddd" />
-            <text x="20" y="70" font-family="Fredoka" font-size="16" font-weight="bold" fill="#7a6c4b" text-anchor="middle">1st</text>
-          </g>
-          <!-- Skin 2 -->
-          <g transform="translate(42, 5) scale(0.8)">
-            <ellipse cx="20" cy="40" rx="12" ry="20" fill="#fcf9ee" stroke="#b8ad8f" stroke-dasharray="2,2" stroke-width="2" />
-            <circle cx="20" cy="15" r="10" fill="#ddd" />
-            <text x="20" y="70" font-family="Fredoka" font-size="16" font-weight="bold" fill="#7a6c4b" text-anchor="middle">2nd</text>
-          </g>
-          <!-- Skin 3 -->
-          <g transform="translate(88, 0) scale(0.9)">
-            <ellipse cx="20" cy="40" rx="12" ry="20" fill="#fcf9ee" stroke="#b8ad8f" stroke-dasharray="2,2" stroke-width="2" />
-            <circle cx="20" cy="15" r="10" fill="#ddd" />
-            <text x="20" y="70" font-family="Fredoka" font-size="16" font-weight="bold" fill="#7a6c4b" text-anchor="middle">3rd</text>
-          </g>
-          <!-- Skin 4 -->
-          <g transform="translate(138, -5) scale(1)">
-            <ellipse cx="20" cy="40" rx="14" ry="22" fill="#fff9e2" stroke="#cca83c" stroke-width="3" />
-            <circle cx="20" cy="15" r="11" fill="#75cb52" stroke="#5a9e3e" stroke-width="1.5" />
-            <text x="20" y="75" font-family="Fredoka" font-size="16" font-weight="bold" fill="#c89d20" text-anchor="middle">4th 🎉</text>
-          </g>
-        </g>
-      </svg>
-    `
+    illustration: `<img src="assets/growing_silkworm.png" alt="A silkworm caterpillar on a branch">`
   },
   {
     // Q7
     cn: {
       question: "7. 蚕蛾会不会飞？",
       options: ["A. 飞得很高", "B. 只会扑扇翅膀，不会远飞", "C. 完全不会动"],
-      correctFeedback: "答对了！蚕蛾有翅膀，但已经退化了，只会扑扇翅膀在地上爬，不能飞高飞远。" + "🦋👣",
+      correctFeedback: "答对啦！蚕蛾有翅膀，但已经退化了，只会扑扇翅膀在地上爬，不能飞高飞远。🦋👣",
       incorrectFeedback: "不对呀。蚕蛾虽然会动，也扑扇着翅膀，但它们飞不高也飞不远哦。"
     },
     en: {
@@ -293,43 +131,7 @@ const QUIZ_QUESTIONS = [
     },
     correctAnswer: 1, // B
     stageIndex: 3, // Cocoon stage
-    illustration: `
-      <svg viewBox="0 0 200 150" width="100%" height="100%">
-        <!-- Silk moth fluttering on a wooden log or ground -->
-        <!-- Ground line -->
-        <path d="M20 120 Q 100 110 180 120" stroke="#bbb" stroke-width="3" fill="none" />
-        
-        <g transform="translate(100, 80) scale(0.65)">
-          <!-- Flutter indicators -->
-          <path d="M-85 -45 Q -95 -25 -70 -15" stroke="#ccc" stroke-dasharray="3,3" stroke-width="2" fill="none" />
-          <path d="M85 -45 Q 95 -25 70 -15" stroke="#ccc" stroke-dasharray="3,3" stroke-width="2" fill="none" />
-          
-          <!-- Moth body and fluttering wings -->
-          <g class="wing wing-left">
-            <path d="M-10 -10 Q -80 -70 -90 0 Q -80 40 -10 0 Z" fill="#fdfcf8" stroke="#d5cea3" stroke-width="3" />
-          </g>
-          <g class="wing wing-right">
-            <path d="M10 -10 Q 80 -70 90 0 Q 80 40 10 0 Z" fill="#fdfcf8" stroke="#d5cea3" stroke-width="3" />
-          </g>
-          <ellipse cx="0" cy="0" rx="16" ry="26" fill="#fbfaf3" stroke="#d2c99a" stroke-width="2" />
-          <circle cx="0" cy="-26" r="13" fill="#eae4ca" stroke="#d2c99a" stroke-width="2" />
-          
-          <!-- Eyes -->
-          <circle cx="-5" cy="-28" r="3" fill="#222" />
-          <circle cx="5" cy="-28" r="3" fill="#222" />
-          
-          <!-- Fluff antennae -->
-          <path d="M-10 -38 Q -28 -48 -35 -40" stroke="#7d5a3e" stroke-width="2.5" stroke-linecap="round" fill="none" />
-          <path d="M10 -38 Q 28 -48 35 -40" stroke="#7d5a3e" stroke-width="2.5" stroke-linecap="round" fill="none" />
-        </g>
-        
-        <!-- Little walking dust paths -->
-        <circle cx="65" cy="112" r="1.5" fill="#aaa" />
-        <circle cx="55" cy="115" r="1.5" fill="#aaa" />
-        <circle cx="135" cy="114" r="1.5" fill="#aaa" />
-        <circle cx="145" cy="111" r="1.5" fill="#aaa" />
-      </svg>
-    `
+    illustration: `<img src="assets/fluttering_silk_moth.png" alt="A white silk moth fluttering wings">`
   },
   {
     // Q8
@@ -347,34 +149,13 @@ const QUIZ_QUESTIONS = [
     },
     correctAnswer: 1, // B
     stageIndex: 4, // Silk moth / end stage
-    illustration: `
-      <svg viewBox="0 0 200 150" width="100%" height="100%">
-        <!-- Large caterpillar body segment closeup showing spiracles -->
-        <g transform="translate(10, 10)">
-          <!-- Segment curved shape -->
-          <path d="M30 65 Q 90 20 150 65 Q 160 120 20 100 Z" fill="#edf9e6" stroke="#75cb52" stroke-width="3" />
-          
-          <!-- Highlighted Spiracle (black dot with glowing highlight) -->
-          <circle cx="90" cy="70" r="11" fill="#444" stroke="#ffb13b" stroke-width="3" />
-          <circle cx="90" cy="70" r="6" fill="#111" />
-          
-          <!-- Breathing circles representation -->
-          <circle cx="90" cy="70" r="18" fill="none" stroke="#ffb13b" stroke-width="1.5" opacity="0.6" stroke-dasharray="2,3">
-            <animate attributeName="r" values="12;28" dur="2s" repeatCount="indefinite" />
-            <animate attributeName="opacity" values="0.8;0" dur="2s" repeatCount="indefinite" />
-          </circle>
-          
-          <!-- Small labels inside the SVG -->
-          <text x="90" y="105" font-family="Fredoka" font-size="11" font-weight="bold" fill="#75cb52" text-anchor="middle">气门 / Spiracle</text>
-          
-          <!-- Secondary dots -->
-          <circle cx="45" cy="78" r="4" fill="#555" />
-          <circle cx="135" cy="76" r="4" fill="#555" />
-        </g>
-      </svg>
-    `
+    illustration: `<img src="assets/silkworm_spiracles.png" alt="Close-up of a caterpillar body showing spiracles">`
   }
 ];
+
+function getCleanOptionText(optionText) {
+  return optionText.replace(/^[A-C]\.\s*/i, '');
+}
 
 // ==========================================================================
 // WEB AUDIO API SOUND EFFECTS GENERATOR
@@ -511,6 +292,94 @@ class SoundSynthesizer {
 const sounds = new SoundSynthesizer();
 
 // ==========================================================================
+// WEB SPEECH API CONTROLLER FOR KIDS
+// ==========================================================================
+const speech = {
+  utterance: null,
+  voices: [],
+
+  loadVoices() {
+    this.voices = window.speechSynthesis.getVoices();
+  },
+
+  getPreferredVoice(langCode) {
+    if (!this.voices.length) this.loadVoices();
+    const langPrefix = langCode === 'en' ? 'en' : 'zh';
+    const matchingVoices = this.voices.filter((voice) => voice.lang.toLowerCase().startsWith(langPrefix));
+    const naturalNameHints = ['premium', 'enhanced', 'neural', 'samantha', 'ting-ting', 'mei-jia', 'sin-ji', 'google'];
+
+    return matchingVoices.find((voice) =>
+      naturalNameHints.some((hint) => voice.name.toLowerCase().includes(hint))
+    ) || matchingVoices[0] || null;
+  },
+
+  speak(text, langCode, callbackStart, callbackEnd) {
+    if (sounds.isMuted) {
+      window.speechSynthesis.cancel();
+      return;
+    }
+    
+    window.speechSynthesis.cancel();
+    
+    this.utterance = new SpeechSynthesisUtterance(text);
+    
+    if (langCode === 'en') {
+      this.utterance.lang = 'en-US';
+      this.utterance.rate = 0.9;
+    } else {
+      this.utterance.lang = 'zh-CN';
+      this.utterance.rate = 0.88;
+    }
+    this.utterance.voice = this.getPreferredVoice(langCode);
+    this.utterance.pitch = 1.03;
+    this.utterance.volume = 0.96;
+    
+    if (callbackStart) this.utterance.onstart = callbackStart;
+    if (callbackEnd) {
+      this.utterance.onend = callbackEnd;
+      this.utterance.onerror = callbackEnd;
+    }
+    
+    window.speechSynthesis.speak(this.utterance);
+  },
+
+  stop() {
+    window.speechSynthesis.cancel();
+  }
+};
+
+function speakCurrentQuestion() {
+  const index = state.currentQuestionIndex;
+  const q = QUIZ_QUESTIONS[index];
+  const isEn = state.currentLang === 'en';
+  const langData = isEn ? q.en : q.cn;
+  
+  let speakText = "";
+  if (isEn) {
+    speakText = `Question ${index + 1}: ${langData.question.replace(/^\d+\.\s*/, '')}. `;
+    speakText += `Option A: ${getCleanOptionText(langData.options[0])}. `;
+    speakText += `Option B: ${getCleanOptionText(langData.options[1])}. `;
+    speakText += `Option C: ${getCleanOptionText(langData.options[2])}.`;
+  } else {
+    speakText = `第 ${index + 1} 题。 ${langData.question.replace(/^\d+\.\s*/, '')}。 `;
+    speakText += `选项 A，${getCleanOptionText(langData.options[0])}。 `;
+    speakText += `选项 B，${getCleanOptionText(langData.options[1])}。 `;
+    speakText += `选项 C，${getCleanOptionText(langData.options[2])}。`;
+  }
+  
+  speech.speak(
+    speakText,
+    state.currentLang,
+    () => {
+      if (DOM.btnSpeak) DOM.btnSpeak.classList.add('speaking');
+    },
+    () => {
+      if (DOM.btnSpeak) DOM.btnSpeak.classList.remove('speaking');
+    }
+  );
+}
+
+// ==========================================================================
 // APP STATE CONTROLLER
 // ==========================================================================
 const state = {
@@ -528,6 +397,7 @@ const DOM = {
   btnStart: document.getElementById('btn-start'),
   btnNext: document.getElementById('btn-next'),
   btnRestart: document.getElementById('btn-restart'),
+  btnSpeak: document.getElementById('btn-speak'),
   
   screenWelcome: document.getElementById('screen-welcome'),
   screenQuiz: document.getElementById('screen-quiz'),
@@ -543,6 +413,12 @@ const DOM = {
   feedbackPanel: document.getElementById('feedback-panel'),
   feedbackIcon: document.getElementById('feedback-icon'),
   feedbackMessage: document.getElementById('feedback-message'),
+  feedbackModal: document.getElementById('feedback-modal'),
+  feedbackModalCard: document.getElementById('feedback-modal-card'),
+  feedbackModalIcon: document.getElementById('feedback-modal-icon'),
+  feedbackModalTitle: document.getElementById('feedback-modal-title'),
+  feedbackModalMessage: document.getElementById('feedback-modal-message'),
+  btnModalNext: document.getElementById('btn-modal-next'),
   
   scoreValue: document.getElementById('score-value'),
   scoreEvalCn: document.getElementById('score-eval-cn'),
@@ -627,11 +503,14 @@ function startQuiz() {
 
 function updateProgressTracker() {
   const total = QUIZ_QUESTIONS.length;
-  // Calculate percentage (0% to 100%)
-  const percentage = (state.currentQuestionIndex / total) * 100;
+  const maxIndex = Math.max(total - 1, 1);
+  const percentage = (state.currentQuestionIndex / maxIndex) * 100;
   
-  // Set progress CSS custom property
-  document.documentElement.style.setProperty('--progress-percent', `${percentage}%`);
+  const boundedPercentage = Math.max(0, Math.min(100, percentage));
+  const trackPercentage = boundedPercentage * 0.84;
+
+  document.documentElement.style.setProperty('--progress-percent', `${boundedPercentage}%`);
+  document.documentElement.style.setProperty('--progress-track-percent', `${trackPercentage}%`);
   
   // Find which life stage node to highlight
   // Egg (stage 0): index 0, 1
@@ -666,6 +545,11 @@ function renderQuestion(index) {
   
   // Hide feedback panel
   DOM.feedbackPanel.classList.add('hidden');
+  closeFeedbackModal();
+  
+  // Stop any active speech read alouds
+  speech.stop();
+  if (DOM.btnSpeak) DOM.btnSpeak.classList.remove('speaking');
   
   // Dynamic illustration panel load
   const q = QUIZ_QUESTIONS[index];
@@ -673,6 +557,11 @@ function renderQuestion(index) {
   
   // Render actual texts
   renderCurrentQuestionText();
+  
+  // Automatically speak the question out loud after a brief delay
+  setTimeout(() => {
+    speakCurrentQuestion();
+  }, 400);
 }
 
 function renderCurrentQuestionText() {
@@ -704,7 +593,7 @@ function renderCurrentQuestionText() {
     
     btn.innerHTML = `
       <span class="option-badge">${badgeText}</span>
-      <span class="option-label-text">${optText}</span>
+      <span class="option-label-text">${getCleanOptionText(optText)}</span>
     `;
     
     // Add click handler
@@ -716,6 +605,10 @@ function renderCurrentQuestionText() {
 function selectOption(selectedIdx) {
   if (state.hasAnsweredCurrent) return;
   state.hasAnsweredCurrent = true;
+  
+  // Stop speaking the question text
+  speech.stop();
+  if (DOM.btnSpeak) DOM.btnSpeak.classList.remove('speaking');
   
   const q = QUIZ_QUESTIONS[state.currentQuestionIndex];
   const correctIdx = q.correctAnswer;
@@ -737,28 +630,41 @@ function selectOption(selectedIdx) {
     }
   });
   
-  // Set feedback state
+  // Set feedback state & trigger voice
+  const feedbackSpeech = isCorrect ? langData.correctFeedback : langData.incorrectFeedback;
+  speech.speak(feedbackSpeech, state.currentLang);
+  
   if (isCorrect) {
     state.score++;
     sounds.playCorrect();
     DOM.feedbackIcon.innerText = "🎉";
     DOM.feedbackMessage.innerText = langData.correctFeedback;
+    DOM.feedbackModalIcon.innerText = "🎉";
+    DOM.feedbackModalTitle.innerText = isEn ? "Correct!" : "答对啦！";
+    DOM.feedbackModalMessage.innerText = langData.correctFeedback;
+    DOM.feedbackModalCard.classList.add('correct');
+    DOM.feedbackModalCard.classList.remove('incorrect');
     DOM.feedbackPanel.querySelector('.feedback-content').style.borderColor = "var(--correct)";
     DOM.feedbackPanel.querySelector('.feedback-content').style.backgroundColor = "#f1faf0";
   } else {
     sounds.playIncorrect();
     DOM.feedbackIcon.innerText = "💡";
     DOM.feedbackMessage.innerText = langData.incorrectFeedback;
+    DOM.feedbackModalIcon.innerText = "💡";
+    DOM.feedbackModalTitle.innerText = isEn ? "Good Try!" : "再想想哦！";
+    DOM.feedbackModalMessage.innerText = langData.incorrectFeedback;
+    DOM.feedbackModalCard.classList.add('incorrect');
+    DOM.feedbackModalCard.classList.remove('correct');
     DOM.feedbackPanel.querySelector('.feedback-content').style.borderColor = "var(--incorrect)";
     DOM.feedbackPanel.querySelector('.feedback-content').style.backgroundColor = "#fff5f5";
   }
   
-  // Show feedback panel
-  DOM.feedbackPanel.classList.remove('hidden');
+  openFeedbackModal();
 }
 
 function handleNextQuestion() {
   sounds.playClick();
+  closeFeedbackModal();
   
   const nextIdx = state.currentQuestionIndex + 1;
   const total = QUIZ_QUESTIONS.length;
@@ -771,6 +677,17 @@ function handleNextQuestion() {
     // Reached the end! Final transition
     showResults();
   }
+}
+
+function openFeedbackModal() {
+  DOM.feedbackModal.classList.remove('hidden');
+  DOM.feedbackModal.setAttribute('aria-hidden', 'false');
+  DOM.btnModalNext.focus();
+}
+
+function closeFeedbackModal() {
+  DOM.feedbackModal.classList.add('hidden');
+  DOM.feedbackModal.setAttribute('aria-hidden', 'true');
 }
 
 // ==========================================================================
@@ -834,6 +751,7 @@ function launchConfetti() {
 
 function restartQuiz() {
   sounds.playClick();
+  speech.stop();
   switchScreen('welcome');
 }
 
@@ -845,7 +763,10 @@ function toggleSound() {
   DOM.btnSound.querySelector('.sound-icon').innerText = isMuted ? '🔇' : '🔊';
   DOM.btnSound.setAttribute('aria-label', isMuted ? 'Unmute sounds' : 'Mute sounds');
   
-  if (!isMuted) {
+  if (isMuted) {
+    speech.stop();
+    if (DOM.btnSpeak) DOM.btnSpeak.classList.remove('speaking');
+  } else {
     sounds.playClick();
   }
 }
@@ -894,10 +815,23 @@ function init() {
   DOM.btnSound.addEventListener('click', toggleSound);
   DOM.btnStart.addEventListener('click', startQuiz);
   DOM.btnNext.addEventListener('click', handleNextQuestion);
+  DOM.btnModalNext.addEventListener('click', handleNextQuestion);
   DOM.btnRestart.addEventListener('click', restartQuiz);
+  
+  // Speak question replay button
+  DOM.btnSpeak = document.getElementById('btn-speak');
+  if (DOM.btnSpeak) {
+    DOM.btnSpeak.addEventListener('click', () => {
+      speakCurrentQuestion();
+    });
+  }
   
   // Keyboard listeners
   window.addEventListener('keydown', handleKeyDown);
+  if ('speechSynthesis' in window) {
+    speech.loadVoices();
+    window.speechSynthesis.onvoiceschanged = () => speech.loadVoices();
+  }
   
   // Set default language view
   updateLanguageUI();

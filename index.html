@@ -171,9 +171,12 @@
         </div>
 
         <!-- Question Text -->
-        <h3 class="question-text" id="question-text">
-          <!-- Question text goes here -->
-        </h3>
+        <div class="question-header-row">
+          <h3 class="question-text" id="question-text">
+            <!-- Question text goes here -->
+          </h3>
+          <button id="btn-speak" class="btn-speak" aria-label="Read question aloud / 朗读题目" title="Read question / 听题目">🔊</button>
+        </div>
 
         <!-- Options Container -->
         <div class="options-container" id="options-container" role="radiogroup" aria-labelledby="question-text">
@@ -187,6 +190,19 @@
             <span class="feedback-message" id="feedback-message">真棒！答对啦！</span>
           </div>
           <button id="btn-next" class="btn-primary">
+            <span class="text-cn">继续前进！</span>
+            <span class="text-en hidden">Continue!</span>
+            <span class="btn-arrow" aria-hidden="true">➡️</span>
+          </button>
+        </div>
+      </div>
+
+      <div id="feedback-modal" class="feedback-modal hidden" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="feedback-modal-title">
+        <div id="feedback-modal-card" class="feedback-modal-card">
+          <div id="feedback-modal-icon" class="feedback-modal-icon" aria-hidden="true">🎉</div>
+          <h3 id="feedback-modal-title" class="feedback-modal-title">答对啦！</h3>
+          <p id="feedback-modal-message" class="feedback-modal-message">真棒！</p>
+          <button id="btn-modal-next" class="btn-primary">
             <span class="text-cn">继续前进！</span>
             <span class="text-en hidden">Continue!</span>
             <span class="btn-arrow" aria-hidden="true">➡️</span>
