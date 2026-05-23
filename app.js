@@ -292,17 +292,49 @@ class SoundSynthesizer {
 const sounds = new SoundSynthesizer();
 
 // ==========================================================================
-// WEB SPEECH API CONTROLLER FOR KIDS
+// LOCAL AI VOICE AUDIO + WEB SPEECH FALLBACK CONTROLLER FOR KIDS
 // ==========================================================================
+const LOCAL_VOICE_ENABLED = true;
+
+function getQuestionSpeechText(index, langCode) {
+  const q = QUIZ_QUESTIONS[index];
+  const isEn = langCode === 'en';
+  const langData = isEn ? q.en : q.cn;
+  
+  if (isEn) {
+    return `Question ${index + 1}: ${langData.question.replace(/^\d+\.\s*/, '')}. ` +
+      `Option A: ${getCleanOptionText(langData.options[0])}. ` +
+      `Option B: ${getCleanOptionText(langData.options[1])}. ` +
+      `Option C: ${getCleanOptionText(langData.options[2])}.`;
+  }
+
+  return `第 ${index + 1} 题。 ${langData.question.replace(/^\d+\.\s*/, '')}。 ` +
+    `选项 A，${getCleanOptionText(langData.options[0])}。 ` +
+    `选项 B，${getCleanOptionText(langData.options[1])}。 ` +
+    `选项 C，${getCleanOptionText(langData.options[2])}。`;
+}
+
+function getQuestionAudioPath(index, langCode) {
+  return `assets/voices/${langCode}/question-${index + 1}.mp3`;
+}
+
+function getFeedbackAudioPath(index, langCode, isCorrect) {
+  return `assets/voices/${langCode}/q${index + 1}-${isCorrect ? 'correct' : 'incorrect'}.mp3`;
+}
+
 const speech = {
   utterance: null,
   voices: [],
+  audio: new Audio(),
+  currentFallback: null,
 
   loadVoices() {
+    if (!('speechSynthesis' in window)) return;
     this.voices = window.speechSynthesis.getVoices();
   },
 
   getPreferredVoice(langCode) {
+    if (!('speechSynthesis' in window)) return null;
     if (!this.voices.length) this.loadVoices();
     const langPrefix = langCode === 'en' ? 'en' : 'zh';
     const matchingVoices = this.voices.filter((voice) => voice.lang.toLowerCase().startsWith(langPrefix));
@@ -313,9 +345,45 @@ const speech = {
     ) || matchingVoices[0] || null;
   },
 
-  speak(text, langCode, callbackStart, callbackEnd) {
+  playLocalAudio(src, fallbackText, langCode, callbackStart, callbackEnd) {
     if (sounds.isMuted) {
-      window.speechSynthesis.cancel();
+      this.stop();
+      return;
+    }
+
+    this.stop();
+
+    if (!LOCAL_VOICE_ENABLED || !src) {
+      this.speakWithBrowserVoice(fallbackText, langCode, callbackStart, callbackEnd);
+      return;
+    }
+
+    let usedFallback = false;
+    this.currentFallback = () => {
+      if (usedFallback) return;
+      usedFallback = true;
+      this.speakWithBrowserVoice(fallbackText, langCode, callbackStart, callbackEnd);
+    };
+
+    this.audio = new Audio(src);
+    this.audio.preload = 'auto';
+    this.audio.onplay = () => {
+      if (callbackStart) callbackStart();
+    };
+    this.audio.onended = () => {
+      if (callbackEnd) callbackEnd();
+    };
+    this.audio.onerror = this.currentFallback;
+
+    const playPromise = this.audio.play();
+    if (playPromise) {
+      playPromise.catch(this.currentFallback);
+    }
+  },
+
+  speakWithBrowserVoice(text, langCode, callbackStart, callbackEnd) {
+    if (!('speechSynthesis' in window) || !text) {
+      if (callbackEnd) callbackEnd();
       return;
     }
     
@@ -343,31 +411,29 @@ const speech = {
     window.speechSynthesis.speak(this.utterance);
   },
 
+  speak(text, langCode, callbackStart, callbackEnd) {
+    this.speakWithBrowserVoice(text, langCode, callbackStart, callbackEnd);
+  },
+
   stop() {
-    window.speechSynthesis.cancel();
+    this.currentFallback = null;
+    if (this.audio) {
+      this.audio.pause();
+      this.audio.removeAttribute('src');
+      this.audio.load();
+    }
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.cancel();
+    }
   }
 };
 
 function speakCurrentQuestion() {
   const index = state.currentQuestionIndex;
-  const q = QUIZ_QUESTIONS[index];
-  const isEn = state.currentLang === 'en';
-  const langData = isEn ? q.en : q.cn;
+  const speakText = getQuestionSpeechText(index, state.currentLang);
   
-  let speakText = "";
-  if (isEn) {
-    speakText = `Question ${index + 1}: ${langData.question.replace(/^\d+\.\s*/, '')}. `;
-    speakText += `Option A: ${getCleanOptionText(langData.options[0])}. `;
-    speakText += `Option B: ${getCleanOptionText(langData.options[1])}. `;
-    speakText += `Option C: ${getCleanOptionText(langData.options[2])}.`;
-  } else {
-    speakText = `第 ${index + 1} 题。 ${langData.question.replace(/^\d+\.\s*/, '')}。 `;
-    speakText += `选项 A，${getCleanOptionText(langData.options[0])}。 `;
-    speakText += `选项 B，${getCleanOptionText(langData.options[1])}。 `;
-    speakText += `选项 C，${getCleanOptionText(langData.options[2])}。`;
-  }
-  
-  speech.speak(
+  speech.playLocalAudio(
+    getQuestionAudioPath(index, state.currentLang),
     speakText,
     state.currentLang,
     () => {
@@ -654,7 +720,11 @@ function selectOption(selectedIdx) {
   
   // Set feedback state & trigger voice
   const feedbackSpeech = isCorrect ? langData.correctFeedback : langData.incorrectFeedback;
-  speech.speak(feedbackSpeech, state.currentLang);
+  speech.playLocalAudio(
+    getFeedbackAudioPath(state.currentQuestionIndex, state.currentLang, isCorrect),
+    feedbackSpeech,
+    state.currentLang
+  );
   
   if (isCorrect) {
     state.score++;

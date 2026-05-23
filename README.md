@@ -9,8 +9,39 @@ An interactive and fun bilingual educational quiz game about silkworms designed 
 - 🐛 **动态成长进度条**：答题过程中，可爱的蚕宝宝会根据进度向前爬行，并随着生命周期发生变化（卵 -> 蚁蚕 -> 大蚕 -> 结茧 -> 蚕蛾）。
 - 🎨 **精美童趣设计**：采用柔和的配色方案、圆润的字体和生动的 CSS/SVG 动画。
 - 🔊 **合成音效**：利用 **Web Audio API** 实时合成点击、答对、答错及过关的欢快音效，无需下载外部音频文件，加载速度极快！
+- 🗣️ **AI 本地语音**：可使用 OpenAI TTS 预生成中英文题目和反馈 MP3 到 `assets/voices`，网页优先播放本地文件，缺失时自动回退到浏览器朗读。
 - 🇨🇳/🇬🇧 **双语支持**：一键切换中文/英文内容。
 - ⌨️ **键盘支持**：除触屏与鼠标点击外，还可以按键盘 `1`, `2`, `3`（或 `A`, `B`, `C`）快速选择答案。
+
+## 生成本地 AI 语音 / Generate Local AI Voices
+
+OpenAI Text to Speech 使用 `audio/speech` endpoint；当前官方文档推荐 `gpt-4o-mini-tts`，并支持通过 `instructions` 控制语气。请确保最终用户知道他们听到的是 AI 生成语音。
+
+```bash
+export OPENAI_API_KEY="your_api_key"
+node scripts/generate-voices.mjs
+```
+
+生成后会得到：
+
+```text
+assets/voices/cn/question-1.mp3
+assets/voices/cn/q1-correct.mp3
+assets/voices/cn/q1-incorrect.mp3
+assets/voices/en/question-1.mp3
+assets/voices/en/q1-correct.mp3
+assets/voices/en/q1-incorrect.mp3
+...
+```
+
+可选配置：
+
+```bash
+OPENAI_TTS_MODEL=gpt-4o-mini-tts \
+OPENAI_TTS_CN_VOICE=coral \
+OPENAI_TTS_EN_VOICE=marin \
+node scripts/generate-voices.mjs
+```
 
 ## 运行方式 / How to Run
 
