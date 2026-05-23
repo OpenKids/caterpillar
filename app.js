@@ -542,7 +542,7 @@ function updateLanguageUI() {
   });
 
   // Update App title header
-  DOM.appTitle.innerText = isEn ? "Silkworm's Adventure" : "蚕宝宝成长记";
+  DOM.appTitle.innerText = isEn ? "Silkworm Adventure Quiz" : "蚕宝宝成长记";
 
   // Re-render current question with updated language details if in quiz mode
   if (state.currentScreen === 'quiz') {

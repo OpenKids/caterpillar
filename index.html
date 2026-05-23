@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>蚕宝宝成长记 | Silkworm's Adventure Quiz</title>
-  <meta name="description" content="一个为幼儿园小朋友设计的趣味蚕宝宝科普问答互动网页。An interactive and fun caterpillar/silkworm life cycle quiz designed for kindergarten kids.">
+  <title>南京市鼓楼幼儿园 | 蚕宝宝成长记</title>
+  <meta name="description" content="南京市鼓楼幼儿园蚕宝宝科普互动问答。An interactive silkworm life cycle quiz for Nanjing Gulou Kindergarten.">
   
   <!-- Preconnect to Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -50,9 +50,13 @@
   </div>
 
   <header class="app-header">
-    <div class="logo">
-      <span class="logo-emoji" aria-hidden="true">🐛</span>
-      <h1 class="logo-text" id="app-title">蚕宝宝成长记</h1>
+    <div class="brand">
+      <img class="school-logo" src="assets/nanjing-gulou-kindergarten-logo.jpg" alt="南京市鼓楼幼儿园校徽">
+      <div class="brand-copy">
+        <p class="school-name text-cn">南京市鼓楼幼儿园</p>
+        <p class="school-name text-en hidden">NANJING GULOU KINDERGARTEN</p>
+        <h1 class="logo-text" id="app-title">蚕宝宝成长记</h1>
+      </div>
     </div>
     
     <div class="header-controls">
@@ -73,6 +77,15 @@
     <!-- 1. WELCOME SCREEN -->
     <section id="screen-welcome" class="screen active">
       <div class="welcome-card">
+        <div class="school-badge">
+          <img src="assets/nanjing-gulou-kindergarten-logo.jpg" alt="" aria-hidden="true">
+          <div>
+            <p class="text-cn">南京市鼓楼幼儿园</p>
+            <p class="text-en hidden">NANJING GULOU KINDERGARTEN</p>
+            <span class="text-cn">陈鹤琴先生创办于 1923 年</span>
+            <span class="text-en hidden">Founded by Chen Heqin in 1923</span>
+          </div>
+        </div>
         <div class="welcome-animation" aria-hidden="true">
           <!-- Cute interactive caterpillar drawing -->
           <div class="caterpillar-avatar">
@@ -289,8 +302,8 @@
   </main>
 
   <footer class="app-footer">
-    <p class="text-cn">🌿 蚕宝宝科普互动游戏 · 用爱心和知识陪伴成长 🌿</p>
-    <p class="text-en hidden">🌿 Silkworm Educational Game · Learn with Love & Knowledge 🌿</p>
+    <p class="text-cn">南京市鼓楼幼儿园 · 蚕宝宝科普互动游戏</p>
+    <p class="text-en hidden">Nanjing Gulou Kindergarten · Silkworm Educational Game</p>
   </footer>
 
   <script src="app.js"></script>
