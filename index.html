@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>蚕宝宝成长记 | Silkworm's Adventure Quiz</title>
+  <meta name="description" content="一个为幼儿园小朋友设计的趣味蚕宝宝科普问答互动网页。An interactive and fun caterpillar/silkworm life cycle quiz designed for kindergarten kids.">
+  
+  <!-- Preconnect to Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Load playful fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Quicksand:wght@400..700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Decorative background elements -->
+  <div class="bg-decorations" aria-hidden="true">
+    <div class="bubble bubble-1"></div>
+    <div class="bubble bubble-2"></div>
+    <div class="bubble bubble-3"></div>
+    <div class="floating-leaf leaf-1">
+      <svg viewBox="0 0 100 100" width="80" height="80">
+        <path d="M10 80 Q 30 20 90 10 Q 80 70 10 80 Z" fill="rgba(143, 207, 122, 0.25)" />
+        <path d="M10 80 Q 45 45 90 10" stroke="rgba(255,255,255,0.4)" stroke-width="2" fill="none" />
+      </svg>
+    </div>
+    <div class="floating-leaf leaf-2">
+      <svg viewBox="0 0 100 100" width="60" height="60">
+        <path d="M90 80 Q 70 20 10 10 Q 20 70 90 80 Z" fill="rgba(116, 194, 92, 0.2)" />
+        <path d="M90 80 Q 55 45 10 10" stroke="rgba(255,255,255,0.3)" stroke-width="2" fill="none" />
+      </svg>
+    </div>
+    <div class="sun">
+      <svg viewBox="0 0 100 100" width="100" height="100">
+        <circle cx="50" cy="50" r="25" fill="#ffd15c" />
+        <g stroke="#ffd15c" stroke-width="6" stroke-linecap="round">
+          <line x1="50" y1="10" x2="50" y2="20" />
+          <line x1="50" y1="80" x2="50" y2="90" />
+          <line x1="10" y1="50" x2="20" y2="50" />
+          <line x1="80" y1="50" x2="90" y2="50" />
+          <line x1="22" y1="22" x2="29" y2="29" />
+          <line x1="71" y1="71" x2="78" y2="78" />
+          <line x1="78" y1="22" x2="71" y2="29" />
+          <line x1="29" y1="71" x2="22" y2="78" />
+        </g>
+      </svg>
+    </div>
+  </div>
+
+  <header class="app-header">
+    <div class="logo">
+      <span class="logo-emoji" aria-hidden="true">🐛</span>
+      <h1 class="logo-text" id="app-title">蚕宝宝成长记</h1>
+    </div>
+    
+    <div class="header-controls">
+      <!-- Language Switcher -->
+      <button id="btn-lang" class="btn-control" aria-label="Switch Language / 切换语言">
+        <span class="lang-text">EN</span>
+        <span class="lang-flag" aria-hidden="true">🇬🇧</span>
+      </button>
+      
+      <!-- Audio Toggle -->
+      <button id="btn-sound" class="btn-control" aria-label="Toggle sound / 声音开关">
+        <span class="sound-icon" aria-hidden="true">🔊</span>
+      </button>
+    </div>
+  </header>
+
+  <main class="app-container">
+    <!-- 1. WELCOME SCREEN -->
+    <section id="screen-welcome" class="screen active">
+      <div class="welcome-card">
+        <div class="welcome-animation" aria-hidden="true">
+          <!-- Cute interactive caterpillar drawing -->
+          <div class="caterpillar-avatar">
+            <div class="caterpillar-body">
+              <div class="body-segment seg-4"></div>
+              <div class="body-segment seg-3"></div>
+              <div class="body-segment seg-2"></div>
+              <div class="body-segment seg-1"></div>
+              <div class="caterpillar-head">
+                <div class="eye eye-left"></div>
+                <div class="eye eye-right"></div>
+                <div class="blush blush-left"></div>
+                <div class="blush blush-right"></div>
+                <div class="smile"></div>
+              </div>
+            </div>
+            <div class="welcome-leaf"></div>
+          </div>
+        </div>
+        
+        <h2 class="welcome-title text-cn">欢迎来到蚕宝宝的奇妙世界！</h2>
+        <h2 class="welcome-title text-en hidden">Welcome to the Silkworm's World!</h2>
+        
+        <p class="welcome-subtitle text-cn">你能回答对所有的问题，帮助蚕宝宝长大变成美丽的蚕蛾吗？</p>
+        <p class="welcome-subtitle text-en hidden">Can you answer all the questions to help the caterpillar grow into a beautiful silk moth?</p>
+        
+        <button id="btn-start" class="btn-primary">
+          <span class="text-cn">开始探索！</span>
+          <span class="text-en hidden">Let's Play!</span>
+          <span class="btn-arrow" aria-hidden="true">👉</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- 2. QUIZ SCREEN -->
+    <section id="screen-quiz" class="screen">
+      <!-- Life Cycle Journey Map / Progress Tracker -->
+      <div class="journey-map" aria-label="Caterpillar growth journey">
+        <div class="journey-line"></div>
+        <div class="journey-progress-line" id="journey-progress-bar"></div>
+        
+        <div class="journey-nodes">
+          <div class="journey-node active" id="node-0" data-stage="egg" title="卵 / Egg">
+            <div class="node-icon">🥚</div>
+            <span class="node-label text-cn">蚕卵</span>
+            <span class="node-label text-en hidden">Egg</span>
+          </div>
+          <div class="journey-node" id="node-1" data-stage="baby" title="蚁蚕 / Baby Silkworm">
+            <div class="node-icon">🐛</div>
+            <span class="node-label text-cn">小蚕</span>
+            <span class="node-label text-en hidden">Baby</span>
+          </div>
+          <div class="journey-node" id="node-2" data-stage="big" title="大蚕 / Big Silkworm">
+            <div class="node-icon">🍃</div>
+            <span class="node-label text-cn">大蚕</span>
+            <span class="node-label text-en hidden">Adult</span>
+          </div>
+          <div class="journey-node" id="node-3" data-stage="cocoon" title="蚕茧 / Cocoon">
+            <div class="node-icon">🫓</div>
+            <span class="node-label text-cn">结茧</span>
+            <span class="node-label text-en hidden">Cocoon</span>
+          </div>
+          <div class="journey-node" id="node-4" data-stage="moth" title="蚕蛾 / Moth">
+            <div class="node-icon">🦋</div>
+            <span class="node-label text-cn">蚕蛾</span>
+            <span class="node-label text-en hidden">Moth</span>
+          </div>
+        </div>
+
+        <!-- Crawling caterpillar avatar on the progress bar -->
+        <div class="crawling-caterpillar" id="crawling-caterpillar">
+          <div class="crawler-body">
+            <div class="c-segment cs-3"></div>
+            <div class="c-segment cs-2"></div>
+            <div class="c-segment cs-1"></div>
+            <div class="c-head">
+              <div class="c-eye"></div>
+              <div class="c-smile"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Quiz Card -->
+      <div class="quiz-card" id="quiz-card">
+        <!-- Interactive SVGs dynamic illustration panel -->
+        <div class="illustration-panel" id="illustration-panel" aria-hidden="true">
+          <!-- SVGs will be inserted dynamically by JS based on the question -->
+        </div>
+
+        <!-- Question Counter & Instructions -->
+        <div class="quiz-meta">
+          <span class="question-number" id="question-index-display">Question 1 of 8</span>
+          <div class="keyboard-tip text-cn">可以用键盘按数字键 1, 2, 3 选择答案哦！</div>
+          <div class="keyboard-tip text-en hidden">Tip: You can press keyboard 1, 2, 3 to choose!</div>
+        </div>
+
+        <!-- Question Text -->
+        <h3 class="question-text" id="question-text">
+          <!-- Question text goes here -->
+        </h3>
+
+        <!-- Options Container -->
+        <div class="options-container" id="options-container" role="radiogroup" aria-labelledby="question-text">
+          <!-- Options will be generated dynamically -->
+        </div>
+
+        <!-- Feedback & Next Button -->
+        <div class="feedback-panel hidden" id="feedback-panel">
+          <div class="feedback-content">
+            <span class="feedback-icon" id="feedback-icon">🎉</span>
+            <span class="feedback-message" id="feedback-message">真棒！答对啦！</span>
+          </div>
+          <button id="btn-next" class="btn-primary">
+            <span class="text-cn">继续前进！</span>
+            <span class="text-en hidden">Continue!</span>
+            <span class="btn-arrow" aria-hidden="true">➡️</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. RESULTS SCREEN -->
+    <section id="screen-results" class="screen">
+      <div class="results-card">
+        <div class="moth-celebration" aria-hidden="true">
+          <div class="confetti-container" id="confetti-container"></div>
+          <!-- Cute SVG Silk Moth that flaps wings -->
+          <div class="moth-illustration">
+            <svg viewBox="0 0 200 200" width="160" height="160">
+              <!-- Antennae -->
+              <path d="M85 60 Q 60 40 45 45" stroke="#7d5a3e" stroke-width="3" stroke-linecap="round" fill="none" class="antenna-left" />
+              <path d="M115 60 Q 140 40 155 45" stroke="#7d5a3e" stroke-width="3" stroke-linecap="round" fill="none" class="antenna-right" />
+              
+              <!-- Left Wing -->
+              <g class="wing wing-left">
+                <path d="M90 85 Q 20 30 10 90 Q 20 130 90 95 Z" fill="#fcfaf2" stroke="#e8e2cf" stroke-width="3" />
+                <path d="M80 88 Q 30 50 25 90" stroke="#f1ecdd" stroke-width="2" fill="none" />
+                <path d="M80 92 Q 40 75 35 105" stroke="#f1ecdd" stroke-width="2" fill="none" />
+              </g>
+
+              <!-- Right Wing -->
+              <g class="wing wing-right">
+                <path d="M110 85 Q 180 30 190 90 Q 180 130 110 95 Z" fill="#fcfaf2" stroke="#e8e2cf" stroke-width="3" />
+                <path d="M120 88 Q 170 50 175 90" stroke="#f1ecdd" stroke-width="2" fill="none" />
+                <path d="M120 92 Q 160 75 165 105" stroke="#f1ecdd" stroke-width="2" fill="none" />
+              </g>
+
+              <!-- Body -->
+              <ellipse cx="100" cy="95" rx="18" ry="30" fill="#f0ebd8" stroke="#d5cea3" stroke-width="2" />
+              <line x1="90" y1="85" x2="110" y2="85" stroke="#e1dac2" stroke-width="2" />
+              <line x1="86" y1="95" x2="114" y2="95" stroke="#e1dac2" stroke-width="2" />
+              <line x1="88" y1="105" x2="112" y2="105" stroke="#e1dac2" stroke-width="2" />
+              
+              <!-- Head -->
+              <circle cx="100" cy="65" r="14" fill="#ebe6d0" stroke="#d5cea3" stroke-width="2" />
+              <!-- Eyes -->
+              <circle cx="94" cy="63" r="3.5" fill="#3e2d1f" />
+              <circle cx="106" cy="63" r="3.5" fill="#3e2d1f" />
+              <!-- Cheek blush -->
+              <circle cx="90" cy="70" r="2.5" fill="#ffa6b9" opacity="0.8" />
+              <circle cx="110" cy="70" r="2.5" fill="#ffa6b9" opacity="0.8" />
+            </svg>
+          </div>
+        </div>
+
+        <h2 class="results-title text-cn">恭喜！蚕宝宝顺利长大啦！</h2>
+        <h2 class="results-title text-en hidden">Hooray! Your Caterpillar Has Grown Up!</h2>
+
+        <p class="results-desc text-cn">你帮助它从小小的卵，蜕了4次皮，结成茧，最后变成了会扑扇翅膀的蚕蛾！</p>
+        <p class="results-desc text-en hidden">You helped it grow from a tiny egg, shed skin 4 times, spin a cocoon, and finally transform into a flapping silk moth!</p>
+
+        <!-- Final score badge -->
+        <div class="score-container">
+          <div class="score-circle">
+            <span id="score-value">8</span>
+            <span class="score-max">/8</span>
+          </div>
+          <p class="score-eval text-cn" id="score-eval-cn">哇，你是超级蚕宝宝小专家！</p>
+          <p class="score-eval text-en hidden" id="score-eval-en">Wow, you are a Silkworm Super Expert!</p>
+        </div>
+
+        <button id="btn-restart" class="btn-primary btn-bounce">
+          <span class="text-cn">再玩一次</span>
+          <span class="text-en hidden">Play Again</span>
+          <span class="btn-arrow" aria-hidden="true">🔄</span>
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <p class="text-cn">🌿 蚕宝宝科普互动游戏 · 用爱心和知识陪伴成长 🌿</p>
+    <p class="text-en hidden">🌿 Silkworm Educational Game · Learn with Love & Knowledge 🌿</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
