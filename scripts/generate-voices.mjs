@@ -20,7 +20,8 @@ if (!apiKey) {
   process.exit(1);
 }
 
-function getCleanOptionText(optionText) {
+function getCleanOptionText(option) {
+  const optionText = typeof option === 'string' ? option : option.text;
   return optionText.replace(/^[A-C]\.\s*/i, '');
 }
 

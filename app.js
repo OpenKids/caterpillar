@@ -11,13 +11,21 @@ const QUIZ_QUESTIONS = [
     // Q1
     cn: {
       question: "1. 蚕宝宝最喜欢吃的食物是？",
-      options: ["A. 青菜叶", "B. 桑叶", "C. 白菜叶"],
+      options: [
+        { text: "A. 青菜叶", image: "assets/options/green-vegetable-leaf.png", alt: "一片绿色蔬菜叶" },
+        { text: "B. 桑叶", image: "assets/options/mulberry-leaves.png", alt: "几片绿色桑叶" },
+        { text: "C. 白菜叶", image: "assets/options/cabbage-leaf.png", alt: "一片白菜叶" }
+      ],
       correctFeedback: "真棒！蚕宝宝最喜欢吃绿油油的桑叶啦！🌿",
       incorrectFeedback: "哎呀，不对哦。其实蚕宝宝最爱吃的是桑树上的叶子。"
     },
     en: {
       question: "1. What is the silkworm's favorite food?",
-      options: ["A. Green vegetables", "B. Mulberry leaves", "C. Cabbage leaves"],
+      options: [
+        { text: "A. Green vegetables", image: "assets/options/green-vegetable-leaf.png", alt: "A green vegetable leaf" },
+        { text: "B. Mulberry leaves", image: "assets/options/mulberry-leaves.png", alt: "Several green mulberry leaves" },
+        { text: "C. Cabbage leaves", image: "assets/options/cabbage-leaf.png", alt: "A cabbage leaf" }
+      ],
       correctFeedback: "Awesome! Silkworms love eating yummy green mulberry leaves! 🌿",
       incorrectFeedback: "Oops, not quite. Silkworms actually love leaves from the mulberry tree."
     },
@@ -29,13 +37,21 @@ const QUIZ_QUESTIONS = [
     // Q2
     cn: {
       question: "2. 蚕宝宝最后会变成什么？",
-      options: ["A. 蜜蜂", "B. 蝴蝶", "C. 蚕蛾"],
+      options: [
+        { text: "A. 蜜蜂", image: "assets/options/bee.png", alt: "一只蜜蜂" },
+        { text: "B. 蝴蝶", image: "assets/options/butterfly.png", alt: "一只蝴蝶" },
+        { text: "C. 蚕蛾", image: "assets/options/silk-moth.png", alt: "一只白色蚕蛾" }
+      ],
       correctFeedback: "太聪明啦！蚕宝宝吐丝结茧后，最终会变成白白的蚕蛾！🦋",
       incorrectFeedback: "不对哟。虽然蝴蝶和蜜蜂也很漂亮，但蚕宝宝会变成可爱的蚕蛾。"
     },
     en: {
       question: "2. What will the silkworm turn into in the end?",
-      options: ["A. Bee", "B. Butterfly", "C. Silk moth"],
+      options: [
+        { text: "A. Bee", image: "assets/options/bee.png", alt: "A bee" },
+        { text: "B. Butterfly", image: "assets/options/butterfly.png", alt: "A butterfly" },
+        { text: "C. Silk moth", image: "assets/options/silk-moth.png", alt: "A white silk moth" }
+      ],
       correctFeedback: "Super smart! After spinning cocoons, silkworms transform into white silk moths! 🦋",
       incorrectFeedback: "Not quite. Although bees and butterflies are pretty, silkworms turn into silk moths."
     },
@@ -65,13 +81,21 @@ const QUIZ_QUESTIONS = [
     // Q4
     cn: {
       question: "4. 蚕生命开始的样子是？",
-      options: ["A. 蚕卵", "B. 小蚕", "C. 蚕蛹"],
+      options: [
+        { text: "A. 蚕卵", image: "assets/options/silkworm-eggs.png", alt: "叶子上的蚕卵" },
+        { text: "B. 小蚕", image: "assets/options/baby-silkworm.png", alt: "叶子上的小蚕" },
+        { text: "C. 蚕蛹", image: "assets/options/silkworm-pupa.png", alt: "蚕蛹和茧" }
+      ],
       correctFeedback: "完全正确！蚕的一生是从像小米粒一样的蚕卵开始的！🥚",
       incorrectFeedback: "不对哦。蚕宝宝不是一生下来就是毛毛虫或蛹，它是从卵里孵出来的。"
     },
     en: {
       question: "4. What does a silkworm's life start as?",
-      options: ["A. Silkworm egg", "B. Baby silkworm", "C. Silkworm pupa"],
+      options: [
+        { text: "A. Silkworm egg", image: "assets/options/silkworm-eggs.png", alt: "Silkworm eggs on a leaf" },
+        { text: "B. Baby silkworm", image: "assets/options/baby-silkworm.png", alt: "A baby silkworm on a leaf" },
+        { text: "C. Silkworm pupa", image: "assets/options/silkworm-pupa.png", alt: "A silkworm pupa and cocoon" }
+      ],
       correctFeedback: "Spot on! A silkworm's life begins as a tiny egg, looking like a little grain of millet! 🥚",
       incorrectFeedback: "Not quite. Silkworms aren't born as caterpillars or pupae; they hatch from eggs."
     },
@@ -153,8 +177,22 @@ const QUIZ_QUESTIONS = [
   }
 ];
 
-function getCleanOptionText(optionText) {
-  return optionText.replace(/^[A-C]\.\s*/i, '');
+function getOptionText(option) {
+  return typeof option === 'string' ? option : option.text;
+}
+
+function getCleanOptionText(option) {
+  return getOptionText(option).replace(/^[A-C]\.\s*/i, '');
+}
+
+function getOptionImageMarkup(option) {
+  if (typeof option === 'string' || !option.image) return '';
+
+  return `
+      <span class="option-image-wrap" aria-hidden="true">
+        <img class="option-image" src="${option.image}" alt="">
+      </span>
+    `;
 }
 
 // ==========================================================================
@@ -669,7 +707,7 @@ function renderCurrentQuestionText() {
   // Render Options
   DOM.optionsContainer.innerHTML = '';
   
-  langData.options.forEach((optText, optIdx) => {
+  langData.options.forEach((option, optIdx) => {
     const btn = document.createElement('button');
     btn.className = 'option-btn';
     btn.setAttribute('role', 'radio');
@@ -678,10 +716,14 @@ function renderCurrentQuestionText() {
     
     // Accessibility index binding
     const badgeText = String.fromCharCode(65 + optIdx); // A, B, C
+    if (typeof option !== 'string' && option.alt) {
+      btn.setAttribute('aria-label', `${badgeText}. ${getCleanOptionText(option)}. ${option.alt}`);
+    }
     
     btn.innerHTML = `
       <span class="option-badge">${badgeText}</span>
-      <span class="option-label-text">${getCleanOptionText(optText)}</span>
+      ${getOptionImageMarkup(option)}
+      <span class="option-label-text">${getCleanOptionText(option)}</span>
     `;
     
     // Add click handler
