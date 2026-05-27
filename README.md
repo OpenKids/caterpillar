@@ -25,7 +25,7 @@ node scripts/generate-voices.mjs
 生成后会得到：
 
 ```text
-assets/voices/cn/question-1.mp3
+assets/voices/cn/question-1.wav
 assets/voices/cn/q1-correct.mp3
 assets/voices/cn/q1-incorrect.mp3
 assets/voices/en/question-1.mp3

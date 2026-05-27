@@ -333,13 +333,6 @@ const sounds = new SoundSynthesizer();
 // LOCAL AI VOICE AUDIO + WEB SPEECH FALLBACK CONTROLLER FOR KIDS
 // ==========================================================================
 const LOCAL_VOICE_ENABLED = true;
-const MANUAL_QUESTION_AUDIO = {
-  cn: {
-    0: "assets/voices/cn/蚕宝宝第一题1.wav",
-    1: "assets/voices/cn/蚕宝宝第二题1.wav",
-    2: "assets/voices/cn/蚕宝宝第三题1.wav"
-  }
-};
 const ANSWER_FEEDBACK_AUDIO = {
   correct: "assets/hooray.mp3",
   incorrect: "assets/wrong.mp3"
@@ -364,11 +357,8 @@ function getQuestionSpeechText(index, langCode) {
 }
 
 function getQuestionAudioPath(index, langCode) {
-  if (MANUAL_QUESTION_AUDIO[langCode] && MANUAL_QUESTION_AUDIO[langCode][index]) {
-    return MANUAL_QUESTION_AUDIO[langCode][index];
-  }
-
-  return `assets/voices/${langCode}/question-${index + 1}.mp3`;
+  const extension = langCode === 'cn' ? 'wav' : 'mp3';
+  return `assets/voices/${langCode}/question-${index + 1}.${extension}`;
 }
 
 function getFeedbackAudioPath(index, langCode, isCorrect) {
