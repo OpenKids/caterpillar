@@ -333,6 +333,17 @@ const sounds = new SoundSynthesizer();
 // LOCAL AI VOICE AUDIO + WEB SPEECH FALLBACK CONTROLLER FOR KIDS
 // ==========================================================================
 const LOCAL_VOICE_ENABLED = true;
+const MANUAL_QUESTION_AUDIO = {
+  cn: {
+    0: "assets/voices/cn/蚕宝宝第一题1.wav",
+    1: "assets/voices/cn/蚕宝宝第二题1.wav",
+    2: "assets/voices/cn/蚕宝宝第三题1.wav"
+  }
+};
+const ANSWER_FEEDBACK_AUDIO = {
+  correct: "assets/hooray.mp3",
+  incorrect: "assets/wrong.mp3"
+};
 
 function getQuestionSpeechText(index, langCode) {
   const q = QUIZ_QUESTIONS[index];
@@ -353,6 +364,10 @@ function getQuestionSpeechText(index, langCode) {
 }
 
 function getQuestionAudioPath(index, langCode) {
+  if (MANUAL_QUESTION_AUDIO[langCode] && MANUAL_QUESTION_AUDIO[langCode][index]) {
+    return MANUAL_QUESTION_AUDIO[langCode][index];
+  }
+
   return `assets/voices/${langCode}/question-${index + 1}.mp3`;
 }
 
@@ -462,6 +477,43 @@ const speech = {
     }
     if ('speechSynthesis' in window) {
       window.speechSynthesis.cancel();
+    }
+  }
+};
+
+const answerFeedbackAudio = {
+  audio: new Audio(),
+
+  play(isCorrect, onDone) {
+    let hasFinished = false;
+    const finish = () => {
+      if (hasFinished) return;
+      hasFinished = true;
+      if (onDone) onDone();
+    };
+
+    if (sounds.isMuted) {
+      finish();
+      return;
+    }
+
+    this.stop();
+    this.audio = new Audio(isCorrect ? ANSWER_FEEDBACK_AUDIO.correct : ANSWER_FEEDBACK_AUDIO.incorrect);
+    this.audio.preload = 'auto';
+    this.audio.onended = finish;
+    this.audio.onerror = finish;
+
+    const playPromise = this.audio.play();
+    if (playPromise) {
+      playPromise.catch(finish);
+    }
+  },
+
+  stop() {
+    if (this.audio) {
+      this.audio.pause();
+      this.audio.removeAttribute('src');
+      this.audio.load();
     }
   }
 };
@@ -675,6 +727,7 @@ function renderQuestion(index) {
   
   // Stop any active speech read alouds
   speech.stop();
+  answerFeedbackAudio.stop();
   if (DOM.btnSpeak) DOM.btnSpeak.classList.remove('speaking');
   
   // Dynamic illustration panel load
@@ -738,6 +791,7 @@ function selectOption(selectedIdx) {
   
   // Stop speaking the question text
   speech.stop();
+  answerFeedbackAudio.stop();
   if (DOM.btnSpeak) DOM.btnSpeak.classList.remove('speaking');
   
   const q = QUIZ_QUESTIONS[state.currentQuestionIndex];
@@ -762,15 +816,16 @@ function selectOption(selectedIdx) {
   
   // Set feedback state & trigger voice
   const feedbackSpeech = isCorrect ? langData.correctFeedback : langData.incorrectFeedback;
-  speech.playLocalAudio(
-    getFeedbackAudioPath(state.currentQuestionIndex, state.currentLang, isCorrect),
-    feedbackSpeech,
-    state.currentLang
-  );
+  answerFeedbackAudio.play(isCorrect, () => {
+    speech.playLocalAudio(
+      getFeedbackAudioPath(state.currentQuestionIndex, state.currentLang, isCorrect),
+      feedbackSpeech,
+      state.currentLang
+    );
+  });
   
   if (isCorrect) {
     state.score++;
-    sounds.playCorrect();
     DOM.feedbackIcon.innerText = "🎉";
     DOM.feedbackMessage.innerText = langData.correctFeedback;
     DOM.feedbackModalIcon.innerText = "🎉";
@@ -781,7 +836,6 @@ function selectOption(selectedIdx) {
     DOM.feedbackPanel.querySelector('.feedback-content').style.borderColor = "var(--correct)";
     DOM.feedbackPanel.querySelector('.feedback-content').style.backgroundColor = "#f1faf0";
   } else {
-    sounds.playIncorrect();
     DOM.feedbackIcon.innerText = "💡";
     DOM.feedbackMessage.innerText = langData.incorrectFeedback;
     DOM.feedbackModalIcon.innerText = "💡";
@@ -886,6 +940,7 @@ function launchConfetti() {
 function restartQuiz() {
   sounds.playClick();
   speech.stop();
+  answerFeedbackAudio.stop();
   switchScreen('welcome');
 }
 
@@ -899,6 +954,7 @@ function toggleSound() {
   
   if (isMuted) {
     speech.stop();
+    answerFeedbackAudio.stop();
     if (DOM.btnSpeak) DOM.btnSpeak.classList.remove('speaking');
   } else {
     sounds.playClick();
