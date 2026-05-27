@@ -623,6 +623,8 @@ function updateLanguageUI() {
 
   // Update App title header
   DOM.appTitle.innerText = isEn ? "Silkworm Adventure Quiz" : "蚕宝宝成长记";
+  updateSoundButtonUI(sounds.isMuted);
+  updateSpeakButtonUI();
 
   // Re-render current question with updated language details if in quiz mode
   if (state.currentScreen === 'quiz') {
@@ -635,6 +637,26 @@ function toggleLanguage() {
   sounds.playClick();
   state.currentLang = state.currentLang === 'cn' ? 'en' : 'cn';
   updateLanguageUI();
+}
+
+function updateSoundButtonUI(isMuted) {
+  const isEn = state.currentLang === 'en';
+  DOM.btnSound.classList.toggle('is-muted', isMuted);
+  DOM.btnSound.querySelector('.sound-label').innerText = isMuted
+    ? (isEn ? 'Off' : '关')
+    : (isEn ? 'On' : '开');
+  DOM.btnSound.setAttribute('aria-label', isMuted
+    ? (isEn ? 'Unmute sounds' : '开启声音')
+    : (isEn ? 'Mute sounds' : '关闭声音'));
+  DOM.btnSound.setAttribute('aria-pressed', String(isMuted));
+}
+
+function updateSpeakButtonUI() {
+  const isEn = state.currentLang === 'en';
+  if (!DOM.btnSpeak) return;
+  DOM.btnSpeak.querySelector('.speak-label').innerText = isEn ? 'Replay' : '重听';
+  DOM.btnSpeak.setAttribute('aria-label', isEn ? 'Replay question audio' : '重听题目');
+  DOM.btnSpeak.setAttribute('title', isEn ? 'Replay question audio' : '重听题目');
 }
 
 // ==========================================================================
@@ -939,8 +961,7 @@ function restartQuiz() {
 // ==========================================================================
 function toggleSound() {
   const isMuted = sounds.toggleMute();
-  DOM.btnSound.querySelector('.sound-icon').innerText = isMuted ? '🔇' : '🔊';
-  DOM.btnSound.setAttribute('aria-label', isMuted ? 'Unmute sounds' : 'Mute sounds');
+  updateSoundButtonUI(isMuted);
   
   if (isMuted) {
     speech.stop();

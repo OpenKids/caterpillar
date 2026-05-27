@@ -67,8 +67,20 @@
       </button>
       
       <!-- Audio Toggle -->
-      <button id="btn-sound" class="btn-control" aria-label="Toggle sound / 声音开关">
-        <span class="sound-icon" aria-hidden="true">🔊</span>
+      <button id="btn-sound" class="btn-control btn-sound" aria-label="关闭声音" aria-pressed="false">
+        <span class="sound-icon" aria-hidden="true">
+          <svg class="sound-svg sound-on" viewBox="0 0 24 24" role="img">
+            <path d="M4 9v6h4l5 4V5L8 9H4z"></path>
+            <path d="M16 8.5a5 5 0 0 1 0 7"></path>
+            <path d="M18.7 5.8a9 9 0 0 1 0 12.4"></path>
+          </svg>
+          <svg class="sound-svg sound-off" viewBox="0 0 24 24" role="img">
+            <path d="M4 9v6h4l5 4V5L8 9H4z"></path>
+            <path d="M17 9l4 4"></path>
+            <path d="M21 9l-4 4"></path>
+          </svg>
+        </span>
+        <span class="sound-label">开</span>
       </button>
     </div>
   </header>
@@ -196,7 +208,10 @@
           <h3 class="question-text" id="question-text">
             <!-- Question text goes here -->
           </h3>
-          <button id="btn-speak" class="btn-speak" aria-label="Read question aloud / 朗读题目" title="Read question / 听题目">🔊</button>
+          <button id="btn-speak" class="btn-speak" aria-label="重听题目" title="重听题目">
+            <span class="speak-icon" aria-hidden="true">↻</span>
+            <span class="speak-label">重听</span>
+          </button>
         </div>
 
         <!-- Options Container -->
