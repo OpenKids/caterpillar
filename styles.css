@@ -171,11 +171,11 @@ html[lang="en"] body {
   justify-content: space-between;
   align-items: center;
   z-index: 10;
-  font-family: var(--font-formal-en);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
 html[lang="zh-CN"] .app-header {
-  font-family: var(--font-formal-cn);
+  font-family: "PingFang SC", "Microsoft YaHei", system-ui, -apple-system, sans-serif;
 }
 
 .brand {
@@ -402,13 +402,58 @@ html[lang="zh-CN"] .app-header {
 }
 
 .welcome-animation {
-  width: 200px;
-  height: 170px;
+  width: min(100%, 420px);
+  height: clamp(160px, 46vw, 196px);
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
-  margin-bottom: 10px;
+  margin: 0 0 4px;
+  isolation: isolate;
+}
+
+.welcome-photo-reel {
+  position: absolute;
+  inset: 0;
+  border-radius: 22px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.6);
+  border: 4px solid rgba(255, 255, 255, 0.92);
+  box-shadow: 0 16px 30px rgba(74, 120, 74, 0.18);
+}
+
+.welcome-photo-reel::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(48, 91, 43, 0.12)),
+    radial-gradient(circle at 18% 12%, rgba(255, 255, 255, 0.32), transparent 28%);
+  pointer-events: none;
+}
+
+.welcome-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: rgba(248, 255, 244, 0.88);
+  opacity: 0;
+  transform: scale(1.08) translateX(18px);
+  animation: welcome-photo-cycle 12s infinite ease-in-out;
+}
+
+.photo-1 {
+  animation-delay: 0s;
+}
+
+.photo-2 {
+  animation-delay: 4s;
+}
+
+.photo-3 {
+  animation-delay: 8s;
 }
 
 .welcome-title {
@@ -430,6 +475,9 @@ html[lang="zh-CN"] .app-header {
   position: relative;
   width: 180px;
   height: 100px;
+  z-index: 1;
+  transform: translateY(clamp(46px, 14vw, 62px));
+  filter: drop-shadow(0 8px 10px rgba(45, 89, 38, 0.18));
 }
 
 .caterpillar-body {
@@ -531,6 +579,21 @@ html[lang="zh-CN"] .app-header {
 @keyframes leaf-rustle {
   0%, 100% { transform: rotate(-10deg) scale(1); }
   50% { transform: rotate(-15deg) scale(1.05); }
+}
+
+@keyframes welcome-photo-cycle {
+  0% {
+    opacity: 0;
+    transform: scale(1.08) translateX(18px);
+  }
+  8%, 30% {
+    opacity: 1;
+    transform: scale(1.01) translateX(0);
+  }
+  38%, 100% {
+    opacity: 0;
+    transform: scale(1.04) translateX(-18px);
+  }
 }
 
 /* ==========================================================================
@@ -1507,11 +1570,11 @@ html[lang="zh-CN"] .app-header {
   color: var(--text-light);
   font-weight: 500;
   flex-shrink: 0;
-  font-family: var(--font-formal-en);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
 html[lang="zh-CN"] .app-footer {
-  font-family: var(--font-formal-cn);
+  font-family: "PingFang SC", "Microsoft YaHei", system-ui, -apple-system, sans-serif;
 }
 
 .footer-class-signature {
