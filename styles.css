@@ -28,6 +28,8 @@
   --border-radius-md: 16px;
   --font-fun: "Fredoka", "Quicksand", system-ui, -apple-system, sans-serif;
   --font-cn: "Itijyou Raurafont", "PingFang SC", "Microsoft YaHei", system-ui, -apple-system, sans-serif;
+  --font-formal-en: "Lora", "Georgia", serif;
+  --font-formal-cn: "Noto Serif SC", "Songti SC", "STSong", "SimSun", serif;
   
   /* Journey Progress Indicator */
   --progress-percent: 0%;
@@ -169,6 +171,11 @@ html[lang="en"] body {
   justify-content: space-between;
   align-items: center;
   z-index: 10;
+  font-family: var(--font-formal-en);
+}
+
+html[lang="zh-CN"] .app-header {
+  font-family: var(--font-formal-cn);
 }
 
 .brand {
@@ -218,6 +225,7 @@ html[lang="en"] body {
 }
 
 .btn-control {
+  font-family: inherit;
   background: white;
   border: 2px solid hsl(142, 35%, 85%);
   cursor: pointer;
@@ -1499,6 +1507,18 @@ html[lang="en"] body {
   color: var(--text-light);
   font-weight: 500;
   flex-shrink: 0;
+  font-family: var(--font-formal-en);
+}
+
+html[lang="zh-CN"] .app-footer {
+  font-family: var(--font-formal-cn);
+}
+
+.footer-class-signature {
+  margin-top: 4px;
+  font-size: 0.78rem;
+  opacity: 0.8;
+  font-weight: 400;
 }
 
 /* ==========================================================================
