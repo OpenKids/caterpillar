@@ -572,6 +572,9 @@ const DOM = {
   scoreValue: document.getElementById('score-value'),
   scoreEvalCn: document.getElementById('score-eval-cn'),
   scoreEvalEn: document.getElementById('score-eval-en'),
+  badgeImage: document.getElementById('badge-image'),
+  badgeTitleCn: document.getElementById('badge-title-cn'),
+  badgeTitleEn: document.getElementById('badge-title-en'),
   confettiContainer: document.getElementById('confetti-container')
 };
 
@@ -630,6 +633,8 @@ function updateLanguageUI() {
   if (state.currentScreen === 'quiz') {
     updateProgressTracker();
     renderCurrentQuestionText();
+  } else if (state.currentScreen === 'results') {
+    renderAchievementBadge();
   }
 }
 
@@ -902,6 +907,7 @@ function showResults() {
   
   // Render score details
   DOM.scoreValue.innerText = state.score;
+  renderAchievementBadge();
   
   const isEn = state.currentLang === 'en';
   const scoreEvaluationsCn = {
@@ -923,6 +929,46 @@ function showResults() {
 
   // Fire confetti animation
   launchConfetti();
+}
+
+function getAchievementBadge(score) {
+  if (score >= 7) {
+    return {
+      src: "assets/badges/silkworm-expert.png",
+      altCn: "金冠蚕蛾成就徽章",
+      altEn: "Golden silk moth achievement badge",
+      titleCn: "金冠蚕蛾徽章",
+      titleEn: "Golden Moth Badge"
+    };
+  }
+
+  if (score >= 5) {
+    return {
+      src: "assets/badges/silkworm-explorer.png",
+      altCn: "桑叶探险家成就徽章",
+      altEn: "Mulberry explorer achievement badge",
+      titleCn: "桑叶探险家徽章",
+      titleEn: "Mulberry Explorer Badge"
+    };
+  }
+
+  return {
+    src: "assets/badges/silkworm-sprout.png",
+    altCn: "蚕宝宝新芽成就徽章",
+    altEn: "Silkworm sprout achievement badge",
+    titleCn: "蚕宝宝新芽徽章",
+    titleEn: "Silkworm Sprout Badge"
+  };
+}
+
+function renderAchievementBadge() {
+  const badge = getAchievementBadge(state.score);
+  const isEn = state.currentLang === 'en';
+
+  DOM.badgeImage.src = badge.src;
+  DOM.badgeImage.alt = isEn ? badge.altEn : badge.altCn;
+  DOM.badgeTitleCn.innerText = badge.titleCn;
+  DOM.badgeTitleEn.innerText = badge.titleEn;
 }
 
 function launchConfetti() {

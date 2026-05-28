@@ -241,7 +241,7 @@
           <div class="confetti-container" id="confetti-container"></div>
           <!-- Cute SVG Silk Moth that flaps wings -->
           <div class="moth-illustration">
-            <svg viewBox="0 0 200 200" width="160" height="160">
+            <svg viewBox="0 0 200 200" width="130" height="130">
               <!-- Antennae -->
               <path d="M85 60 Q 60 40 45 45" stroke="#7d5a3e" stroke-width="3" stroke-linecap="round" fill="none" class="antenna-left" />
               <path d="M115 60 Q 140 40 155 45" stroke="#7d5a3e" stroke-width="3" stroke-linecap="round" fill="none" class="antenna-right" />
@@ -286,9 +286,18 @@
 
         <!-- Final score badge -->
         <div class="score-container">
-          <div class="score-circle">
-            <span id="score-value">8</span>
-            <span class="score-max">/8</span>
+          <div class="results-row-showcase">
+            <div class="achievement-badge" aria-live="polite">
+              <img id="badge-image" src="assets/badges/silkworm-expert.png" alt="">
+              <div class="badge-copy">
+                <p class="badge-title text-cn" id="badge-title-cn">金冠蚕蛾徽章</p>
+                <p class="badge-title text-en hidden" id="badge-title-en">Golden Moth Badge</p>
+              </div>
+            </div>
+            <div class="score-circle">
+              <span id="score-value">8</span>
+              <span class="score-max">/8</span>
+            </div>
           </div>
           <p class="score-eval text-cn" id="score-eval-cn">哇，你是超级蚕宝宝小专家！</p>
           <p class="score-eval text-en hidden" id="score-eval-en">Wow, you are a Silkworm Super Expert!</p>
